@@ -1,0 +1,121 @@
+import {
+  Footprints,
+  Flame,
+  Award,
+  Compass,
+  Crown,
+  Atom,
+  Sigma,
+  Brain,
+  CalendarCheck,
+  CalendarRange,
+  Star,
+  Target,
+  Dumbbell,
+  Medal,
+} from 'lucide-react';
+import { GAMES } from './games';
+
+export const ACHIEVEMENTS = [
+  {
+    id: 'first-run',
+    title: 'First Steps',
+    description: 'Play your first experiment',
+    icon: Footprints,
+    check: ({ plays }) => plays >= 1,
+  },
+  {
+    id: 'ten-runs',
+    title: 'Getting Warm',
+    description: 'Log 10 runs total',
+    icon: Flame,
+    check: ({ plays }) => plays >= 10,
+  },
+  {
+    id: 'fifty-runs',
+    title: 'Half Century',
+    description: 'Log 50 runs total',
+    icon: Dumbbell,
+    check: ({ plays }) => plays >= 50,
+  },
+  {
+    id: 'centurion',
+    title: 'Centurion',
+    description: 'Log 100 runs total',
+    icon: Medal,
+    check: ({ plays }) => plays >= 100,
+  },
+  {
+    id: 'explorer',
+    title: 'Explorer',
+    description: 'Try 5 different experiments',
+    icon: Compass,
+    check: ({ counts }) => Object.values(counts).filter((c) => c > 0).length >= 5,
+  },
+  {
+    id: 'polymath',
+    title: 'Polymath',
+    description: 'Try 10 different experiments',
+    icon: Award,
+    check: ({ counts }) => Object.values(counts).filter((c) => c > 0).length >= 10,
+  },
+  {
+    id: 'completionist',
+    title: 'Completionist',
+    description: 'Try every experiment',
+    icon: Crown,
+    check: ({ counts }) => GAMES.every((g) => (counts[g.key] || 0) > 0),
+  },
+  {
+    id: 'physicist',
+    title: 'Physicist',
+    description: 'Score 800+ on any physics lab',
+    icon: Atom,
+    check: ({ best }) =>
+      GAMES.some((g) => g.category === 'physics' && (best[g.key] || 0) >= 800),
+  },
+  {
+    id: 'mathlete',
+    title: 'Mathlete',
+    description: 'Score 200+ on any math challenge',
+    icon: Sigma,
+    check: ({ best }) =>
+      GAMES.some((g) => g.category === 'math' && (best[g.key] || 0) >= 200),
+  },
+  {
+    id: 'mastermind',
+    title: 'Mastermind',
+    description: 'Score 800+ on any brain game',
+    icon: Brain,
+    check: ({ best }) =>
+      GAMES.some((g) => g.category === 'brain' && (best[g.key] || 0) >= 800),
+  },
+  {
+    id: 'daily-1',
+    title: 'Daily Habit',
+    description: 'Complete your first daily challenge',
+    icon: CalendarCheck,
+    check: ({ dailyCount }) => (dailyCount || 0) >= 1,
+  },
+  {
+    id: 'daily-7',
+    title: 'Week Streak',
+    description: 'Complete 7 daily challenges',
+    icon: CalendarRange,
+    check: ({ dailyCount }) => (dailyCount || 0) >= 7,
+  },
+  {
+    id: 'high-scorer',
+    title: 'High Scorer',
+    description: 'Score 1000+ on any experiment',
+    icon: Star,
+    check: ({ best }) => Object.values(best).some((v) => (v || 0) >= 1000),
+  },
+  {
+    id: 'sharpshooter',
+    title: 'Sharpshooter',
+    description: 'Score 500+ on 5 different experiments',
+    icon: Target,
+    check: ({ best }) => Object.values(best).filter((v) => (v || 0) >= 500).length >= 5,
+  },
+];

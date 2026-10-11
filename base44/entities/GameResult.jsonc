@@ -1,0 +1,81 @@
+{
+  "name": "GameResult",
+  "type": "object",
+  "properties": {
+    "game_key": {
+      "type": "string",
+      "description": "Stable identifier of the game that was played"
+    },
+    "game_title": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "physics",
+        "math",
+        "brain"
+      ]
+    },
+    "score": {
+      "type": "number"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Short human readable description of the run"
+    },
+    "is_daily": {
+      "type": "boolean",
+      "description": "True when this run counted toward a daily challenge"
+    },
+    "challenge_date": {
+      "type": "string",
+      "description": "YYYY-MM-DD date of the daily challenge this run counts toward"
+    }
+  },
+  "required": [
+    "game_key",
+    "score"
+  ],
+  "rls": {
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
